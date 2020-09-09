@@ -1,0 +1,6 @@
+[book]
+authors = ["swiftdiaries"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Kubeflow - The Hard Way"
