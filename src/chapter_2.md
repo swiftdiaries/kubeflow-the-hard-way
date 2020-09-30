@@ -1,3 +1,1 @@
-# Installing Istio
-
-## Using the Istio Operator
+# Glue components and services
