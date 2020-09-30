@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">1.</strong> Installing Istio</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">2.</strong> Installing Knative</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">3.</strong> Ingress</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_4_1.html"><strong aria-hidden="true">3.1.</strong> API Gateway</a></li><li class="chapter-item expanded "><a href="chapter_4_2.html"><strong aria-hidden="true">3.2.</strong> SSL</a></li><li class="chapter-item expanded "><a href="chapter_4_3.html"><strong aria-hidden="true">3.3.</strong> SSO</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">4.</strong> Core Kubeflow components</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_5_1.html"><strong aria-hidden="true">4.1.</strong> Jupyter Web App</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Core Kubeflow components</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="jupyter.html"><strong aria-hidden="true">1.1.</strong> Jupyter Web App</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Glue components and services</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ingress.html"><strong aria-hidden="true">2.1.</strong> Ingress</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api_gateway.html"><strong aria-hidden="true">2.1.1.</strong> API Gateway</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">2.1.2.</strong> SSL</a></li><li class="chapter-item expanded "><a href="oauth.html"><strong aria-hidden="true">2.1.3.</strong> OAuth</a></li></ol></li><li class="chapter-item expanded "><a href="service_mesh.html"><strong aria-hidden="true">2.2.</strong> Service Mesh</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -162,40 +162,58 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
-<p>Kubeflow is an ML platform built on top of Kubernetes.</p>
-<p>The primary target users are infrastructure engineers and SREs who are already using Kubernetes for their application infrastructure and are starting to build out similar workflows/tooling to boost productivity of data scientists in their organisation.</p>
-<h3><a class="header" href="#who-is-kubeflow-for" id="who-is-kubeflow-for">Who is Kubeflow for?</a></h3>
+<p>Kubeflow is an ML toolkit built on top of Kubernetes.</p>
+<p>This tutorial walks you through using Kubeflow applications the hard way. This guide aims to show and teach the 
+underlying Kubernetes APIs. <br />
+Please refer to the <a href="https://www.kubeflow.org/docs/started/getting-started/">Getting Started Guide</a> for easier installation.</p>
+<p>This guide is not meant for production clusters, it's optimized for learning.</p>
+<h2><a class="header" href="#target-audience" id="target-audience">Target Audience</a></h2>
+<p>This guide is for people looking to use Kubeflow in production and want to learn how the pieces fit together.</p>
+<h2><a class="header" href="#cluster-requirements" id="cluster-requirements">Cluster Requirements</a></h2>
+<p>We will be using <a href="https://kind.sigs.k8s.io/">KIND</a> to bootstrap clusters and we'll use different clusters for each application and learn it.</p>
+<p>Alternatives:</p>
 <ul>
-<li>SREs, Infrastructure Engineers using Kubernetes.</li>
-<li>Infrastructure teams building Data Science Productivity Platforms on
-Kubernetes.</li>
-<li>Teams with size more than 30 (you will need a team of 10 engineers to
-maintain the lifecycle of Kubeflow clusters).</li>
+<li><a href="https://rancher.com/docs/k3s/latest/en/">Rancher's k3s</a></li>
 </ul>
-<h3><a class="header" href="#who-is-kubeflow-not-for" id="who-is-kubeflow-not-for">Who is Kubeflow not for?</a></h3>
+<h1><a class="header" href="#core-kubeflow-applications" id="core-kubeflow-applications">Core Kubeflow applications</a></h1>
+<p>Broadly, the applications in Kubeflow can be split into three categories:</p>
 <ul>
-<li>Data Scientists with little sysadmin skills.</li>
+<li>Core</li>
+<li>Glue</li>
+<li>Out of tree</li>
 </ul>
-<h2><a class="header" href="#why-the-gatekeeping" id="why-the-gatekeeping">Why the gatekeeping?</a></h2>
-<p>The value provided by Kubeflow starts showing when the team starts scaling.
-So for teams not meeting the criteria a managed services like <a href="https://www.wandb.com/">Weights and Biases</a> for experiment tracking, <a href="https://www.h2o.ai/products/h2o-driverless-ai/">h20.ai</a> for a Platform, <a href="https://www.seldon.io/tech/products/">Seldon</a> for deploying ML models among the startups and on the hyper-scalers AWS (SageMaker), Azure ML or GCP's AI Platform should suffice.
-The additional complexity incurred in maintenance of your infrastructure should
-not come in the way of your core business logic which is essentially the
-proverbial golden goose.</p>
-<p>So I would strongly encourage people to try other platforms
-and services <em><strong>before</strong></em> taking a look at Kubeflow.</p>
-<p>Kubeflow is enormously complex and has many moving parts. Much like Kubernetes
-in it's early stages. With continued efforts hopefully it will someday be as
-accessible as Kubernetes. </p>
-<h1><a class="header" href="#installing-istio" id="installing-istio">Installing Istio</a></h1>
-<h2><a class="header" href="#using-the-istio-operator" id="using-the-istio-operator">Using the Istio Operator</a></h2>
-<h1><a class="header" href="#installing-knative" id="installing-knative">Installing Knative</a></h1>
-<h1><a class="header" href="#configuring-ingress-ssl" id="configuring-ingress-ssl">Configuring Ingress, SSL</a></h1>
+<p>Some of the core Kubeflow components are:</p>
+<ul>
+<li>Jupyter Web App</li>
+<li>Pipelines</li>
+<li>KFServing</li>
+<li></li>
+</ul>
+<h1><a class="header" href="#jupyter-web-app" id="jupyter-web-app">Jupyter Web App</a></h1>
+<h1><a class="header" href="#glue-components-and-services" id="glue-components-and-services">Glue components and services</a></h1>
+<h1><a class="header" href="#ingress" id="ingress">Ingress</a></h1>
+<p>Now, there are multiple ways to go about connecting different services in a cluster. I'm going to go for <a href="https://docs.solo.io/gloo/latest/getting_started/">Gloo</a>.</p>
+<p>Here's why:</p>
+<ul>
+<li>Simple installation</li>
+<li>External Auth Support</li>
+<li>API Gateway for Ingress</li>
+<li>Easy to add services into the gateway (Virtual Services)</li>
+<li>Knative Support</li>
+</ul>
+<p>Very good alterantives to consider:</p>
+<ul>
+<li><a href="https://www.getambassador.io/docs/latest/">Ambassador</a></li>
+<li><a href="">Contour</a></li>
+<li><a href="">Kong</a></li>
+<li><a href="">Istio</a></li>
+</ul>
+<h2><a class="header" href="#networking-architecture" id="networking-architecture">Networking Architecture</a></h2>
+<p><img src="assets/kubeflow_architecture.png" alt="Arch" /></p>
 <h1><a class="header" href="#api-gateway" id="api-gateway">API Gateway</a></h1>
 <h1><a class="header" href="#ssl" id="ssl">SSL</a></h1>
-<h1><a class="header" href="#sso" id="sso">SSO</a></h1>
-<h1><a class="header" href="#installing-core-kubeflow-components" id="installing-core-kubeflow-components">Installing Core Kubeflow components</a></h1>
-<h1><a class="header" href="#jupyter-web-app" id="jupyter-web-app">Jupyter Web App</a></h1>
+<h1><a class="header" href="#oauth" id="oauth">OAuth</a></h1>
+<h1><a class="header" href="#service-mesh" id="service-mesh">Service Mesh</a></h1>
 
                     </main>
 
