@@ -11,4 +11,3 @@ Some of the core Kubeflow components are:
 - Jupyter Web App
 - Pipelines
 - KFServing
-- 
